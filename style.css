@@ -90,6 +90,9 @@ input:focus {
 }
 
 .score-box--hastextinput {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   color: var(--main-color);
   background-color: var(--background-color);
   grid-column: span 2;
