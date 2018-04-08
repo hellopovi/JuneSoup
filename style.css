@@ -2,10 +2,16 @@
   --main-color: #00cc7e;
   --shadow-color: rgba(0, 0, 0, 0.4);
   --background-color: #fff;
+  --box-shadow: 1px 1px 0px 0px var(--shadow-color);
 }
 
 body {
   font-family: 'Fira Sans', sans-serif;
+}
+
+/* It is a wrong thing to do, however we indicate focused elements with rotation */
+input:focus {
+  outline: none;
 }
 
 .main {
@@ -34,9 +40,14 @@ body {
   text-align: center;
 }
 
-.score-box:hover,
-.score-box:focus {
-  box-shadow: inset -2px -2px 0px 0px var(--shadow-color);
+.score-box:focus-within {
+  outline: none;
+  transform: rotate(1deg);
+  transition: transform 1s ease 0s;
+}
+
+.score-box:hover {
+  box-shadow: var(--box-shadow);
 }
 
 .score {
@@ -53,19 +64,12 @@ body {
   border-radius: 100%;
 }
 
-.score-box:hover + span,
-.score-box:focus {
-  box-shadow: inset 2px 2px 0px 0px var(--shadow-color);
-}
-
-.score-box:hover span::before,
-.score-box:focus span::before {
-  box-shadow: inset -1px -1px 0px 0px var(--shadow-color);
+.score-box:hover span::before {
+  box-shadow: var(--box-shadow);
 }
 
 .score:checked + span::before,
-.score:not(:checked) + span::before
-{
+.score:not(:checked) + span::before {
   content: '';
   display: block;
   margin-top: 5px;
@@ -82,5 +86,14 @@ body {
 }
 
 .score-submit-btn {
+  grid-column: 1 / -1;
+}
+
+.score-box--hastextinput {
+  color: var(--main-color);
+  background-color: var(--background-color);
   grid-column: span 2;
+  text-align: initial;
+  border: 1px solid var(--main-color);
+  font-size: initial;
 }
